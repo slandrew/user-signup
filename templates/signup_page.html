@@ -1,26 +1,21 @@
-<!DOCTYPE html>
-    <html>
-        <header>
-            <h1>My Awesome Website</h1>
-        </header>
-        <body>
+{% extends 'base.html' %}
+
+{% block content %}
             <h2>Signup Sheet</h2>
             <form action="/authenticate" method="post">
                 <label>
-                    Username: <input type="text" name="username" />
+                    Username:<br>
+                     <input type="text" name="username" value='{{username}}'/>{{username_error}}<br>
                 </label>
                 <label>
-                    Password: <input type="password" name="password1" />
+                    Password:<br> <input type="password" name="password1" />{{password_error}}<br>
                 </label>
-                <label>Re-type Password: 
-                    <input type="text" name="password2" />
+                <label>Re-type Password:<br> 
+                    <input type="password" name="password2" /><br>
                 </label>
                 <label>
-                    E-mail Address: <input type="email" name="email" />
+                    E-mail Address:<br> <input type="email" name="email" value='{{email}}' />{{email_error}}<br>
                 </label>
+                <input type='submit' name='Submit' />
             </form>
-        </body>
-        <footer>
-            <p>The Experience Enterprises</p>
-        </footer>
-    </html>
+{% endblock %}
