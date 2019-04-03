@@ -56,17 +56,21 @@ def validate():
         error = "Password mismatch. Please try again."
         return render_template('signup_page.html', password_error=error, username=username, email=email)
 
-    if not valid_email(email):
-        error = "Please enter a valid email address."
-        return render_template('signup_page.html', email_error=error, username=username, email=email)
+    if email:
+        if not valid_email(email):
+            error = "Please enter a valid email address."
+            return render_template('signup_page.html', email_error=error, username=username, email=email)
+    else:
+        email = 'No email on file.'
 
 
 
-    return redirect('/welcome?username={0}'.format(username))
+    return redirect('/welcome?username={0}&email={1}'.format(username, email))
 
 @app.route('/welcome', methods=['POST', 'GET'])
 def welcome():
     username = request.args.get('username')
-    return render_template('welcome.html', username=username)
+    email = request.args.get('email')
+    return render_template('welcome.html', username=username, email=email)
 
 app.run()
